@@ -8,4 +8,4 @@ npx expo start
 On your phone, scan the QR-code with your phone's camera
 Emulator:
 
-From snack-judge folder, run: npm run ios
+From face-judge folder, run: npm run ios
