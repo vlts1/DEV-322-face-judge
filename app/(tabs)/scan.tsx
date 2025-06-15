@@ -1,12 +1,11 @@
 import NoCameraPermission from '@/components/help_components/NoCameraPermission';
 import CloudEmoji from '@/components/scanner/CloudEmoji';
-import useMoodEngineWithSensors from '@/hooks/useMoodEngine';
-import { useMoodHistory } from '@/hooks/useMoodHistory';
+import { useDBWrapper } from '@/hooks/useDBWrapper';
+import useMoodEngineInterface from '@/hooks/useMoodEngineInterface';
 import { useIsFocused } from '@react-navigation/native';
 import { CameraView, useCameraPermissions } from 'expo-camera';
 import * as Crypto from 'expo-crypto';
 import * as FileSystem from 'expo-file-system';
-import { useRouter } from 'expo-router';
 import { useEffect, useRef } from 'react';
 import { Alert, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -23,11 +22,10 @@ export default function ScanScreen() {
   const insets = useSafeAreaInsets();
   const [permission, requestPermission] = useCameraPermissions();
   const isFocused = useIsFocused();
-  const router = useRouter();
   const hasScanned = useRef(false);
   const cameraRef = useRef<CameraView>(null);
-  const moodEngine = useMoodEngineWithSensors();
-  const moodHistory = useMoodHistory();
+  const moodEngine = useMoodEngineInterface();
+  const moodHistory = useDBWrapper();
 
   useEffect(() => {
     requestPermission();

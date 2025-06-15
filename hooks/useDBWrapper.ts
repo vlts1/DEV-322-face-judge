@@ -10,7 +10,7 @@ export interface Mood {
   emoji: string;
 }
 
-export const useMoodHistory = () => {
+export const useDBWrapper = () => {
   const [history, setHistory] = useState<Mood[]>([]);
 
   useFocusEffect(
