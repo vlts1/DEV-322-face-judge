@@ -1,11 +1,14 @@
+import * as Battery from 'expo-battery';
 import * as Location from 'expo-location';
 import { LightSensor, Pedometer } from 'expo-sensors';
 import { useEffect, useRef, useState } from 'react';
+// - Singh
 
 export default function useSensorManager() {
   const [light, setLight] = useState(100);
   const [steps, setSteps] = useState(0);
   const [altitude, setAltitude] = useState<number | null>(null);
+  const [battery, setBattery] = useState<number>(1); // Range: 0.0 to 1.0
   const [loading, setLoading] = useState(true);
 
   const stepStartTimeRef = useRef<Date | null>(null);
@@ -20,6 +23,7 @@ export default function useSensorManager() {
 
       await fetchLocation();
       await fetchSteps();
+      await fetchBattery();
 
       lightSub = LightSensor.addListener(data => {
         if (data?.illuminance != null) {
@@ -35,6 +39,7 @@ export default function useSensorManager() {
       intervalRef.current = setInterval(async () => {
         await fetchLocation();
         await fetchSteps();
+        await fetchBattery();
       }, 5000);
 
       setLoading(false);
@@ -63,6 +68,16 @@ export default function useSensorManager() {
       }
     };
 
+    const fetchBattery = async () => {
+      try {
+        const level = await Battery.getBatteryLevelAsync();
+        setBattery(level); // 0.0 to 1.0
+        console.log('Battery level:', level);
+      } catch (err) {
+        console.warn('Battery error:', err);
+      }
+    };
+
     init();
 
     return () => {
@@ -72,5 +87,5 @@ export default function useSensorManager() {
     };
   }, []);
 
-  return { light, steps, altitude, loading };
+  return { light, steps, altitude, battery, loading };
 }
