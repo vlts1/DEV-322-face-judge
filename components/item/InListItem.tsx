@@ -1,5 +1,13 @@
-import { useRouter } from 'expo-router';
-import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { useState } from 'react';
+import {
+  Image,
+  Modal,
+  Pressable,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { ThemedText } from '../ThemedText';
 // vlad
 interface MoodEntryItemProps {
@@ -9,22 +17,55 @@ interface MoodEntryItemProps {
   imageUrl: string;
 }
 
-export function InListItem({ id, emoji, suggestion, imageUrl }: MoodEntryItemProps) {
-  const router = useRouter();
+export function InListItem({
+  id,
+  emoji,
+  suggestion,
+  imageUrl,
+}: MoodEntryItemProps) {
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const formattedDate = new Date(id).toLocaleString(undefined, {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  });
 
   return (
-    <TouchableOpacity onPress={() => {}}>
-      <View style={styles.layout}>
-        <Image
-          source={{ uri: imageUrl }}
-          style={styles.image}
-        />
-        <View style={styles.textLayout}>
-          <ThemedText style={styles.title}>{emoji}</ThemedText>
-          <ThemedText style={styles.subtitle}>{suggestion}</ThemedText>
-        </View>
+    <View style={styles.layout}>
+      <TouchableOpacity onPress={() => setModalVisible(true)}>
+        <Image source={{ uri: imageUrl }} style={styles.image} />
+      </TouchableOpacity>
+
+      <View style={styles.emojiContainer}>
+        <Text style={styles.emoji}>{emoji}</Text>
       </View>
-    </TouchableOpacity>
+
+      <View style={styles.textLayout}>
+        <ThemedText style={styles.suggestion}>{suggestion}</ThemedText>
+        <ThemedText style={styles.date}>{formattedDate}</ThemedText>
+      </View>
+
+      <Modal
+        visible={modalVisible}
+        transparent={false}
+        animationType="fade"
+        onRequestClose={() => setModalVisible(false)}
+      >
+        <Pressable
+          style={styles.fullImageContainer}
+          onPress={() => setModalVisible(false)}
+        >
+          <Image
+            source={{ uri: imageUrl }}
+            style={styles.fullImage}
+            resizeMode="contain"
+          />
+        </Pressable>
+      </Modal>
+    </View>
   );
 }
 
@@ -32,12 +73,11 @@ const styles = StyleSheet.create({
   layout: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 20,
     paddingVertical: 10,
     paddingHorizontal: 16,
+    gap: 16,
     borderRadius: 12,
-    marginBottom: 6,
-    marginTop: 6,
+    marginVertical: 6,
   },
   image: {
     width: 90,
@@ -45,18 +85,43 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     backgroundColor: '#e0e0e0',
   },
+  emojiContainer: {
+    width: 90,
+    height: 90,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  emoji: {
+    fontSize: 72,
+    lineHeight: 80,
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    includeFontPadding: false,
+    paddingTop: 2,
+  },
+  
   textLayout: {
+    flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
-    flex: 1,
   },
-  title: {
-    fontSize: 24,
-    fontWeight: '600',
-    marginBottom: 4,
-  },
-  subtitle: {
+  suggestion: {
     fontSize: 16,
     color: '#666',
+    marginBottom: 4,
+  },
+  date: {
+    fontSize: 12,
+    color: '#999',
+  },
+  fullImageContainer: {
+    flex: 1,
+    backgroundColor: 'black',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  fullImage: {
+    width: '100%',
+    height: '100%',
   },
 });

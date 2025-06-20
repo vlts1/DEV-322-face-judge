@@ -2,15 +2,9 @@ import * as Location from 'expo-location';
 import { useEffect, useState } from 'react';
 import useRecommendationEngine from './useRecommendationEngine';
 import useSensorManager from './useSensorManager';
+import { MoodEntry } from '@/components/MoodEntry';
 
-// Singh
-
-type MoodEntry = {
-  moodLabel: string;
-  emoji: string;
-  suggestion: string;
-  loading: boolean;
-};
+// Vlad & Singh
 
 export default function useMoodEngineInterface(): MoodEntry {
   const { light, steps, altitude, loading, battery } = useSensorManager();

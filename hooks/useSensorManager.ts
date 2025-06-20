@@ -2,7 +2,7 @@ import * as Battery from 'expo-battery';
 import * as Location from 'expo-location';
 import { LightSensor, Pedometer } from 'expo-sensors';
 import { useEffect, useRef, useState } from 'react';
-// - Singh
+// Vlad & Singh
 
 export default function useSensorManager() {
   const [light, setLight] = useState(100);

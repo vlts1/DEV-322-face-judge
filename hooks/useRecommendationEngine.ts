@@ -12,7 +12,7 @@ type Params = {
   setSuggestion: (text: string) => void;
 };
 
-// - Singh
+// Vlad & Singh
 
 export default function useRecommendationEngine({
   light,

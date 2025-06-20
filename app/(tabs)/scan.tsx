@@ -42,7 +42,7 @@ export default function ScanScreen() {
       if (!cameraRef.current) return;
 
       const photo = await cameraRef.current.takePictureAsync();
-      const id = generateId();
+      const id = await generateId();
       const newPath = `${FileSystem.documentDirectory}${id}.jpg`;
 
       await FileSystem.moveAsync({
