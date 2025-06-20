@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import useRecommendationEngine from './useRecommendationEngine';
 import useSensorManager from './useSensorManager';
 
-// Authored by Vlad
+// Singh
 
 type MoodEntry = {
   moodLabel: string;
@@ -13,7 +13,7 @@ type MoodEntry = {
 };
 
 export default function useMoodEngineInterface(): MoodEntry {
-  const { light, steps, altitude, loading } = useSensorManager();
+  const { light, steps, altitude, loading, battery } = useSensorManager();
 
   const [temperature, setTemperature] = useState(22);
   const [moodLabel, setMoodLabel] = useState('');
@@ -43,7 +43,7 @@ export default function useMoodEngineInterface(): MoodEntry {
     fetchWeather();
   }, []);
 
-  useRecommendationEngine({ light, temperature, steps, altitude, loading, setMoodLabel, setEmoji, setSuggestion });
+  useRecommendationEngine({ light, temperature, steps, altitude, loading, battery, setMoodLabel, setEmoji, setSuggestion });
 
   return { moodLabel, emoji, suggestion, loading };
 }
