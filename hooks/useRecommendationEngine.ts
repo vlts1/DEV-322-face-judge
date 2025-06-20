@@ -5,17 +5,21 @@ type Params = {
   temperature: number;
   steps: number;
   altitude: number | null;
+  battery: number;
   loading: boolean;
   setMoodLabel: (mood: string) => void;
   setEmoji: (emoji: string) => void;
   setSuggestion: (text: string) => void;
 };
 
+// - Singh
+
 export default function useRecommendationEngine({
   light,
   temperature,
   steps,
   altitude,
+  battery,
   loading,
   setMoodLabel,
   setEmoji,
@@ -23,7 +27,7 @@ export default function useRecommendationEngine({
 }: Params) {
   useEffect(() => {
     if (loading) return;
-    console.log('Mood Engine Updated:', { light, steps, temperature, altitude });
+    console.log('Mood Engine Updated:', { light, steps, temperature, altitude, battery });
 
     let mood = 'neutral';
     let emojiResult = '😐';
@@ -49,10 +53,14 @@ export default function useRecommendationEngine({
       mood = 'peaceful';
       emojiResult = '😊';
       suggestionResult = 'Enjoy the calm – maybe some music?';
+    } else if (battery < 0.2) {
+      mood = 'drained';
+      emojiResult = '🔋';
+      suggestionResult = 'Plug in your phone and take a break.';
     }
 
     setMoodLabel(mood);
     setEmoji(emojiResult);
     setSuggestion(suggestionResult);
-  }, [light, temperature, steps, altitude, loading]);
+  }, [light, temperature, steps, altitude, battery, loading]);
 }
