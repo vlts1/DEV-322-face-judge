@@ -1,6 +1,8 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from 'expo-router';
 import { useCallback, useState } from 'react';
+import * as FileSystem from 'expo-file-system';
+
 
 // By vlad
 export interface Mood {
@@ -66,5 +68,30 @@ export const useDBWrapper = () => {
     }
   };
 
-  return { addToHistory, history, forgetMood, refreshHistory };
+
+//adding clear history function to hook remove excess images
+const clearHistory = async () => {
+  try {
+    // Get the current history
+    const currentHistory = await _getMoodHistory();
+    // Delete all image files referenced in history
+    await Promise.all(
+      currentHistory.map(async (item) => {
+        if (item.imageUrl) {
+          try {
+            await FileSystem.deleteAsync(item.imageUrl, { idempotent: true });
+          } catch (e) {
+            console.warn('Failed to delete image:', item.imageUrl, e);
+          }
+        }
+      })
+    );
+    // Clear AsyncStorage and state
+    await AsyncStorage.removeItem('moods');
+    setHistory([]);
+  } catch (error) {
+    console.error('Error clearing mood history:', error);
+  }
+};
+  return { addToHistory, history, forgetMood, refreshHistory, clearHistory };
 }
