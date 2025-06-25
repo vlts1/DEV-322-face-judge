@@ -1,5 +1,5 @@
-import { Tabs } from 'expo-router';
 import React from 'react';
+import { Tabs } from 'expo-router';
 import { Platform } from 'react-native';
 import { HapticTab } from '@/components/HapticTab';
 import { IconSymbol } from '@/components/ui/IconSymbol';
@@ -24,17 +24,18 @@ export default function TabLayout() {
           default: {},
         }),
       }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'History',
-          headerTitleStyle: {fontSize: 19},
-          tabBarIcon: ({ color }) => 
-            Platform.OS === "ios" 
-              ? <IconSymbol size={28} name="newspaper.fill" color={color} />
-              : <MaterialIcons name="newspaper" size={24} color={color}/>,
-        }}
-      />
+              <Tabs.Screen
+                name="home"
+                options={{
+                  title: 'Home',
+                  headerTitleStyle: {fontSize: 19},
+                  tabBarIcon: ({ color }) =>
+                    Platform.OS === "ios"
+                      ? <IconSymbol size={28} name="house.fill" color={color} />
+                      : <MaterialIcons name="home" size={24} color={color}/>,
+                }}
+              />
+
       <Tabs.Screen
         name="scan"
         options={{
@@ -46,6 +47,18 @@ export default function TabLayout() {
               : <MaterialIcons name="camera" size={24} color={color}/>,
         }}
       />
+      <Tabs.Screen
+        name="index"
+        options={{
+          title: 'History',
+          headerTitleStyle: {fontSize: 19},
+          tabBarIcon: ({ color }) =>
+            Platform.OS === "ios"
+              ? <IconSymbol size={28} name="newspaper.fill" color={color} />
+              : <MaterialIcons name="newspaper" size={24} color={color}/>,
+        }}
+      />
+
     </Tabs>
   );
 }

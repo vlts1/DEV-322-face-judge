@@ -4,7 +4,7 @@
     "slug": "face-judge",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/facelogo.png",
     "scheme": "facejudge",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
