@@ -7,7 +7,7 @@ export default function HomeScreen() {
   return (
     <ThemedView style={styles.container}>
       <ThemedText type="title" style={styles.title}>Welcome to the Face Judge!</ThemedText>
-      <ThemedText style={styles.subtitle}>Click below to get scanning</ThemedText>
+      <ThemedText style={styles.subtitle}>Click below to get scanning 😊</ThemedText>
       <Link href="/(tabs)/scan" asChild>
         <TouchableOpacity style={styles.button}>
           <ThemedText style={styles.buttonText}>Scan</ThemedText>
