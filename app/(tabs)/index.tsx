@@ -5,7 +5,7 @@ import { useDBWrapper } from '@/hooks/useDBWrapper';
 import { useFocusEffect } from 'expo-router';
 import { useCallback } from 'react';
 import { ScrollView, StyleSheet, View, useColorScheme } from 'react-native';
-// By vlad and zoe
+// By vlad & zoe
 export default function FaceJudgeMain() {
   const { history, refreshHistory } = useDBWrapper();
   const colorScheme = useColorScheme();

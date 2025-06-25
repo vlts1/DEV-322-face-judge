@@ -7,7 +7,7 @@ import TabBarBackground from '@/components/ui/TabBarBackground';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { MaterialIcons } from '@expo/vector-icons';
-// by vlad and zoe
+// by vlad & zoe
 export default function TabLayout() {
   const colorScheme = useColorScheme();
 

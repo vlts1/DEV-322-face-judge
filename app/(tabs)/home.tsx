@@ -1,8 +1,8 @@
+//nick
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { Link } from 'expo-router';
 import { StyleSheet, TouchableOpacity } from 'react-native';
-//nick adding home/landing page w ui tweaks
 export default function HomeScreen() {
   return (
     <ThemedView style={styles.container}>
