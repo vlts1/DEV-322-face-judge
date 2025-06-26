@@ -75,6 +75,7 @@ export default function ScanScreen() {
           ref={cameraRef}
           style={StyleSheet.absoluteFill}
           facing="front"
+          aria-label='Camera View'
         />
         <CloudEmoji emoji={moodEngine.emoji} />
         <View style={[styles.captureButtonContainer, { bottom: insets.bottom + 70 }]}>

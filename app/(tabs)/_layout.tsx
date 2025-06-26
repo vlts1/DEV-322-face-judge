@@ -24,17 +24,17 @@ export default function TabLayout() {
           default: {},
         }),
       }}>
-              <Tabs.Screen
-                name="home"
-                options={{
-                  title: 'Home',
-                  headerTitleStyle: {fontSize: 19},
-                  tabBarIcon: ({ color }) =>
-                    Platform.OS === "ios"
-                      ? <IconSymbol size={28} name="house.fill" color={color} />
-                      : <MaterialIcons name="home" size={24} color={color}/>,
-                }}
-              />
+      <Tabs.Screen
+        name="home"
+        options={{
+          title: 'Home',
+          headerTitleStyle: {fontSize: 19},
+          tabBarIcon: ({ color }) =>
+            Platform.OS === "ios"
+              ? <IconSymbol size={28} name="house.fill" color={color} />
+              : <MaterialIcons name="home" size={24} color={color}/>,
+        }}
+      />
 
       <Tabs.Screen
         name="scan"

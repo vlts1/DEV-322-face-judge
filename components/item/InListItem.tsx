@@ -36,7 +36,7 @@ export function InListItem({
   return (
     <View style={styles.layout}>
       <TouchableOpacity onPress={() => setModalVisible(true)}>
-        <Image source={{ uri: imageUrl }} style={styles.image} />
+        <Image source={{ uri: imageUrl }} style={styles.image} aria-label='User Picture'/>
       </TouchableOpacity>
 
       <View style={styles.emojiContainer}>
