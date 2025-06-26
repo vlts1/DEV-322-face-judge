@@ -71,7 +71,7 @@ const CloudEmoji = ({ emoji }: { emoji: string }) => {
   }, [emoji]);
 
   return (
-    <View style={[styles.container, { top: insets.top }]}>
+    <View style={[styles.container, { top: insets.top }]} aria-label='Current mood emoji'>
       <Animated.View style={[styles.cloud, { opacity: cloudOpacity }]}>
         <MaterialIcons name="cloud" size={120} color="white" />
       </Animated.View>
