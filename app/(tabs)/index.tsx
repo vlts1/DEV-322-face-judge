@@ -5,9 +5,8 @@ import { useDBWrapper } from '@/hooks/useDBWrapper';
 import { useFocusEffect } from 'expo-router';
 import { useCallback } from 'react';
 // adding imports to clear history button -nick
-import * as FileSystem from 'expo-file-system';
 import { ScrollView, StyleSheet, View, useColorScheme, Button } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+
 // By vlad & zoe
 export default function FaceJudgeMain() {
   const { history, refreshHistory, clearHistory } = useDBWrapper();
